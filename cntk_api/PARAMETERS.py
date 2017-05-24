@@ -183,8 +183,6 @@ elif datasetName.startswith("azeite"):
     classes = ('__background__',  # always have '__background__' be at index 0
                "azeite andorinha")
 
-
-
     # roi generation
     cntk_nrRois = azeite_nRois   #this number is too low to get good accuracy but allows for fast training and scoring (for demo purposes)
     roi_minDimRel = 0.04

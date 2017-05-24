@@ -7,25 +7,21 @@ import helpers
 
     # chamar esse metodo pelo WS, tem que passar a imagem em bytes e ele retorna string com json
 def userRequest(imageJpgBytes):
+    
     receiveImageJpgBytes(receiveImageJpgBytes)
     return getJSon()
 
-
-
-def getJSon():
+def getJSon_Intelligent_promoter():
+    #img = readImageToByte("D:/1.jpg")
+    #myJson = {"imagem":str(img)}
     myJson =  generateJson()# gera o json do cntk
-    myJson = applyPrecisionToJSon(3.0,myJson) # aplica um nivel de precisao ex. 2.0 = 20% de precisao
     return myJson
 
-def receiveImageJpgBytes(imageJpgBytes,destPath):
-    fh = open(destPath, "wb")
-    fh.write( base64.b64decode(imageJpgBytes))
-    fh.close()
+def getSavedJSon_Intelligent_promoter():
+    myJson = json.loads(readTxtToString( recognizeDir+"return.json"))
+    return myJson    
 
-def readImageToByte(source):
-    imageStr =""
-    with open(source, "rb") as imageFile:
-        imageStr = base64.b64encode(imageFile.read())
-    return imageStr
+
+
 
 

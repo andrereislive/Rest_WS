@@ -13,18 +13,12 @@ def image_list(request):
     """
     if request.method == 'GET':
        
-        serializer = getJSon()
+        #serializer = getJSon_Intelligent_promoter()
+        serializer = getSavedJSon_Intelligent_promoter()
 
         return JsonResponse(serializer, safe=False)
 
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = ImageInfoSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
-
+   
       
 # Fim Funcoes - Intelligent Promoter        
 ###############################################

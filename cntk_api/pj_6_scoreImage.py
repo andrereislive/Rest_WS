@@ -4,6 +4,7 @@ import PARAMETERS
 from helpers_cntk import *
 from copy import deepcopy
 from restPivot import *
+import base64
 
 locals().update(importlib.import_module("PARAMETERS").__dict__)
 
@@ -90,22 +91,33 @@ def generateJson():
             len(nmsKeepIndices), len(labels), nmsThreshold))
     print("Time non-maxima surpression [ms]: " + str((datetime.datetime.now() - tstart).total_seconds() * 1000))
 
+
+    imgDebug = visualizeResults(imgPath, labels, scores, currRois, classes, nmsKeepIndices,
+                            boDrawNegativeRois=False, boDrawNmsRejectedRois=False)
+    saveDirRecognizedImages = outDir +"Recognized_image_" +os.path.basename(imgPath)
+    imwrite(imgDebug, saveDirRecognizedImages )
  # refina os rois, exibindo somente oos que interessam
     labels, scores, currRois = refineRois(labels, scores, currRois, classes, nmsKeepIndices, boDrawNegativeRois=False, boDrawNmsRejectedRois=False)
-
     #Troca o valor int de labels pelo valor correto da classe, uma string ex. 0 = __backgroun__, 1= coca_cola, 2 = azeite
     mylabelsWithRealName = switchLabelIntToRealName(labels,classes)
+
     # create json-encoded string of all detections
     # carrega  outDic - Dicionario de Saida, com labels em String Ex. __background__, cocacola ...
+    recognized_objects_array =  [{"label": str(l), "nms": str(False), "score": str(s), "left": str(r[0]), "top": str(r[1]), "right": str(r[2]), "bottom": str(r[3]) } for l,s, r in zip(mylabelsWithRealName, scores, currRois)]
    
-    
-    #print("Json-encoded detections: " + ououtDict = [
-    outDict = [{"label": str(l), "nms": str(False), "score": str(s), "left": str(r[0]), "top": str(r[1]), "right": str(r[2]), "bottom": str(r[3]), "processed_image": '' } for l,s, r in zip(mylabelsWithRealName, scores, currRois)]
-   
-  #  outJsonString = json.dumps(outDict)
-   
-   # outDict = removeNonMaximaSuppressionJSon(outDict)
+    #converte a imagem em bytes em base 64, depois converte p string p poder ser serializada pelo json
 
-    return outDict
+   # testImg = base64.b64encode(imgDebug)
+    img = readImageToByte(saveDirRecognizedImages)
+  
+    processed_img = img.decode()
+    
+
+   
+
+    myJson = { "processed_image": processed_img, "clean_image":None, "recognized_objects" : recognized_objects_array }
+
+    writeStringToFile(outDir+"return.json",json.dumps(myJson))
+    return myJson
     
 #generateJson()    

@@ -9,6 +9,7 @@ from os.path import join
 import numpy as np
 from easydict import EasyDict
 from fastRCNN.nms import nms as nmsPython
+import base64
 
 
 
@@ -1197,10 +1198,26 @@ def removeNonMaximaSuppressionJSon(jsonObject):
 
     return  jsonObject              
 
-def imageNumpyArrayToString(image):
-     ## nao esta funcionando
-    img_str = cv2.imencode('.jpg', image)[1].tostring()
-    img_str =  base64.b64encode(img_str)
-    return img_str
 
 
+def receiveImageJpgBytes(imageJpgBytes,destPath):
+    fh = open(destPath, "wb")
+   
+    mstr = str.encode(imageJpgBytes)
+    
+    fh.write( base64.decodestring(mstr))
+    
+    fh.close()
+
+def readImageToByte(source):
+    imageStr =""
+    with open(source, "rb") as imageFile:
+        imgRead = imageFile.read()
+        imageStr = base64.b64encode(imgRead)
+       
+    return imageStr
+
+def readTxtToString(source):
+    with open (source, "r") as myfile:
+        data=myfile.read() 
+    return data    
