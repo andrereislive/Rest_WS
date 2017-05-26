@@ -12,7 +12,8 @@ def image_list(request):
     List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
-       
+        datasetName = "azeite"
+        
         #serializer = getJSon_Intelligent_promoter()
         serializer = getSavedJSon_Intelligent_promoter()
 
