@@ -10,6 +10,10 @@ urlpatterns = [
     # Projeto Identificador de Fungos - Gabriel
     # Coloquem suas Urls aqui abaixo
     #\/ \/ \/ \/ \/ \/ 
-
+ 
+    # Projeto Identificador de Fungos - Gabriel
+    # Coloquem suas Urls aqui abaixo
+    #\/ \/ \/ \/ \/ \/ 
+  url(r'^agricultura/$', views.agricutura),
 
 ]

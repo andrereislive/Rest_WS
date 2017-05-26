@@ -28,7 +28,18 @@ def image_list(request):
 ###################################################
 # INICIO Funcoes - Projeto dos Fungos
 
-# coloquem seus codigos aqui
+
+@csrf_exempt
+def agricutura(request):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+       
+        #serializer = getJSon_Intelligent_promoter()
+        serializer = getAgricuturaJson()
+
+        return JsonResponse(serializer, safe=False)
 
 # Fim Funcoes - Projeto dos Fungos        
 ###############################################

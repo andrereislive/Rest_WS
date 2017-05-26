@@ -19,8 +19,14 @@ def getJSon_Intelligent_promoter():
 
 def getSavedJSon_Intelligent_promoter():
     myJson = json.loads(readTxtToString( recognizeDir+"return.json"))
-    return myJson    
+    return myJson  
 
+def getAgricuturaJson():
+    
+    myJson = json.loads(readTxtToString( recognizeDir+"return.json"))
+    return myJson  
+
+   
 
 
 
