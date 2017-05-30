@@ -14,8 +14,11 @@
 /cntk_api/resources/python34_64bit_requirements
 /cntk_api/resources/python35_64bit_requirements
 /cntk_api/imageRecognize/*
+
 !/cntk_api/imageRecognize/.gitkeep
 /cntk_api/data/*
 !/data/.gitkeep
+/cntk_api/historicStorage/*
+!/cntk_api/historicStorage/.gitkeep
 
 
