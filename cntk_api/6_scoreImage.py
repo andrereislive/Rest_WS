@@ -93,7 +93,7 @@ imgDebug = visualizeResults(imgPath, labels, scores, currRois, classes, nmsKeepI
                             boDrawNegativeRois=False, boDrawNmsRejectedRois=False)
 
 #imshow(imgDebug, waitDuration=5, maxDim=800)
-imwrite(imgDebug, outDir +"Recognized_image_" +os.path.basename(imgPath))
+imwrite(imgDebug, outDir +imageNameRecognizedPrefix +os.path.basename(imgPath))
 
 #Troca o valor int de labels pelo valor correto da classe, uma string ex. 0 = __backgroun__, 1= coca_cola, 2 = azeite
 

@@ -8,12 +8,12 @@ import base64
 
 locals().update(importlib.import_module("PARAMETERS").__dict__)
 
-def generateJson():
+def generateJson(imageUUidName="1"): # passar o nome da imagem somente, sem os diretorios superiores e sem o .jpg
     ####################################
     # Parameters
     ####################################
 
-    imgPath = recognizeDir+"1.jpg"
+    imgPath = recognizeDir+imageUUidName+".jpg"
     # Directory to save recognized images
     outDir = recognizeDir
 
@@ -94,7 +94,7 @@ def generateJson():
 
     imgDebug = visualizeResults(imgPath, labels, scores, currRois, classes, nmsKeepIndices,
                             boDrawNegativeRois=False, boDrawNmsRejectedRois=False)
-    saveDirRecognizedImages = outDir +"Recognized_image_" +os.path.basename(imgPath)
+    saveDirRecognizedImages = outDir +imageNameRecognizedPrefix +os.path.basename(imgPath)
     imwrite(imgDebug, saveDirRecognizedImages )
  # refina os rois, exibindo somente oos que interessam
     labels, scores, currRois = refineRois(labels, scores, currRois, classes, nmsKeepIndices, boDrawNegativeRois=False, boDrawNmsRejectedRois=False)
@@ -117,7 +117,7 @@ def generateJson():
 
     myJson = { "processed_image": processed_img, "clean_image":None, "recognized_objects" : recognized_objects_array }
 
-    writeStringToFile(outDir+"return.json",json.dumps(myJson))
+    writeStringToFile(outDir+imageUUidName+".json",json.dumps(myJson))
     return myJson
     
 #generateJson()    

@@ -11,15 +11,86 @@ def userRequest(imageJpgBytes):
     receiveImageJpgBytes(receiveImageJpgBytes)
     return getJSon()
 
-def getJSon_Intelligent_promoter():
-    #img = readImageToByte("D:/1.jpg")
-    #myJson = {"imagem":str(img)}
-    myJson =  generateJson()# gera o json do cntk
+def recognizeSavedImage(imageUUidName): # passar o nome da imagem somente, sem os diretorios superiores e sem o .jpg
+
+    myJson =  generateJson(imageUUidName)# gera o json do cntk
     return myJson
 
-def getSavedJSon_Intelligent_promoter():
-    myJson = json.loads(readTxtToString( recognizeDir+"return.json"))
+
+def getShelfShareJSon_IntelligentPromoter(imageUidName):
+    
+    myJson = json.loads(readTxtToString( recognizeDir+imageUidName+".json"))
+
+    shelfShareObjects = calculateShareOfobjects(myJson)
+    # Add os shares agrupado para cada produto
+    myJson["shelf_share_objects"] = shelfShareObjects 
+    
+    
+    
     return myJson  
+ # calcula quanto ocupam de espaco em pixels
+def calculateShareOfobjects(objectsJson, imageWidth = 2000 , imageHeight =2000):
+   
+    if(len(objectsJson["recognized_objects"])>0  ):
+        imagePixelsSquared = imageWidth * imageHeight
+
+
+
+        listOfProducts = getListOfProducts(objectsJson)
+        # inicia array 
+        share_first = getProductShare(listOfProducts[0],objectsJson["recognized_objects"] )
+        
+        
+        share_first = ( share_first / imagePixelsSquared )  * 100
+        
+        # inicia array 
+        objects_array =  {"share_percentage": share_first, "product": listOfProducts[0]}
+        dataJson = [objects_array]
+        for x in range(1, len(listOfProducts)):
+            share = getProductShare(listOfProducts[x],objectsJson["recognized_objects"] )
+            share = ( share / imagePixelsSquared )  * 100
+            it = {"share_percentage": share, "product": listOfProducts[x]}
+            dataJson.append(it)
+            
+        return dataJson
+    else:
+        return None
+
+def getProductShare(productName, listRecognizedObj):
+    # calcula o share    
+    shareHolder = 0
+   
+    for x in range(0,len(listRecognizedObj)):
+        if(productName == listRecognizedObj[x]["label"]):
+            left = listRecognizedObj[x]["left"]
+            top =  listRecognizedObj[x]["top"]
+            right = listRecognizedObj[x]["right"]
+            bottom = listRecognizedObj[x]["bottom"]
+            shareHolder = shareHolder + calculateShareSingleProduct(left,top,right,bottom)
+
+    return shareHolder
+
+
+def getListOfProducts(objectsJson):
+    sizeObjects =len(objectsJson["recognized_objects"]) 
+    if(sizeObjects > 0):
+        sizeObjects =len(objectsJson["recognized_objects"]) 
+        listOfLabels = [objectsJson["recognized_objects"][0]["label"]]
+        for x in range(1,sizeObjects):
+            listOfLabels.append(objectsJson["recognized_objects"][x]["label"])
+        
+        # remove os produtos duplicados, set() é uma lista que naoo pode ter duplicados    
+        listOfLabels = list(set(listOfLabels))  
+
+        return listOfLabels  
+
+    # calcula os pixels quadrados de um unico objeto
+def calculateShareSingleProduct(left,top,right,bottom):
+    width = int(right) -  int(left) 
+    height =  int(bottom) -  int(top)
+    pixelsSquared = width * height
+    
+    return pixelsSquared #  pixels quadrados
 
 def getAgricuturaJson():
     

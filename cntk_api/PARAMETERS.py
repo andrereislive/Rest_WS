@@ -35,6 +35,9 @@ cntkFilesDir = procDir + "cntkFiles/"
 trainedSvmDir = procDir + "trainedSvm/"
 cntkResourcesDir = rootDir + "/resources/cntk/"
 recognizeDir = rootDir +"/imageRecognize/"+datasetName+ "/"
+historicStorageDir = rootDir +"/historicStorage/"+datasetName+ "/"
+imageNameRecognizedPrefix = "Recognized_image_" # prefixo do nome de uma imagem reconhecida
+
 
 
 

@@ -99,7 +99,7 @@ def recursiveCallImage(strImageIndex):
     imgDebug = visualizeResults(imgPath, labels, scores, currRois, classes, nmsKeepIndices,
                                 boDrawNegativeRois=False, boDrawNmsRejectedRois=False)
     imshow(imgDebug, waitDuration=1, maxDim=800)
-    imwrite(imgDebug, outDir +"Recognized_image_" +os.path.basename(imgPath))
+    imwrite(imgDebug, outDir +imageNameRecognizedPrefix +os.path.basename(imgPath))
 
 ### Out Of the Functio
 

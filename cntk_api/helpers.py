@@ -10,6 +10,9 @@ import numpy as np
 from easydict import EasyDict
 from fastRCNN.nms import nms as nmsPython
 import base64
+import shutil
+
+
 
 
 
@@ -1108,7 +1111,7 @@ def computeAveragePrecision(recalls, precisions, use_07_metric=False):
         ap = np.sum((mrecalls[i + 1] - mrecalls[i]) * mprecisions[i + 1])
     return ap
 
-# Author - Andre
+########################### Author - Andre ######################################
 
 def switchLabelIntToRealName(label, classes):
     #Troca o valor int de labels pelo valor correto da classe, uma string ex. 0 = __backgroun__, 1= coca_cola, 2 = azeite
@@ -1201,6 +1204,8 @@ def removeNonMaximaSuppressionJSon(jsonObject):
 
 
 def receiveImageJpgBytes(imageJpgBytes,destPath):
+    
+
     fh = open(destPath, "wb")
    
     mstr = str.encode(imageJpgBytes)
@@ -1220,4 +1225,15 @@ def readImageToByte(source):
 def readTxtToString(source):
     with open (source, "r") as myfile:
         data=myfile.read() 
-    return data    
+    return data   
+
+def copyFileToHistoricStorage(source,dest, deleteFromSource = False):  
+    if not os.path.exists(dest):
+        os.makedirs(dest)  
+   
+    shutil.copy2(source , dest)
+
+    if deleteFromSource:
+        os.remove(source)
+
+
