@@ -114,7 +114,6 @@ writeStringToFile(outDir+"requisition.json", outJsonString)
 
 
 
-
 #--- optional code ---#
 
 # write all detections to file, and show how to read in again to visualize
