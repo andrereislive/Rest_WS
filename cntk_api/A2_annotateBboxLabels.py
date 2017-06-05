@@ -9,7 +9,7 @@ locals().update(importlib.import_module("PARAMETERS").__dict__)
 ####################################
 # Parameters
 ####################################
-imagesToAnnotateDir = "D:/CNTK-Workspace/ObjectDetectionUsingCntk/data/azeite/positive/"
+imagesToAnnotateDir = "D:/Documentos/1500fh/Case Supermarket/Machine Learning - Trainning/Fase de Testes/Amostras/Testes/ambientes/Teste6/clean/positive/"
 
 #no need to change these
 boxWidth = 10

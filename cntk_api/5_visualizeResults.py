@@ -72,7 +72,7 @@ for imgIndex in range(0, imdb.num_images):
 
     #visualize results
     imgDebug = visualizeResults(imgPath, labels, scores, imdb.roidb[imgIndex]['boxes'], classes, nmsKeepIndices,
-                                boDrawNegativeRois=False, boDrawNmsRejectedRois=False, decisionThreshold = vis_decisionThresholds[classifier])
+                                boDrawNegativeRois=False, boDrawNmsRejectedRois=False, decisionThreshold = vis_decisionThresholds[classifier], boPrintLabel=False)
     imshow(imgDebug, waitDuration=1, maxDim = 800)
     imwrite(imgDebug, visualizationDir + "/" + classifier + "_" + str(imgIndex) + os.path.basename(imgPath))
     
@@ -107,6 +107,6 @@ for thres in prThresholds:
     r = np.mean(recalls[thres])
     outPR.append((thres, p, r))
     print("   At threshold {:.2f}: precision = {:2.2f}, recall = {:2.2f}".format(thres, p, r))
-#writeTable("precisionRecalls.tsv", outPR)
+writeTable(resultsDir+"precisionRecalls.tsv", outPR)
 
 print("DONE.")

@@ -6,10 +6,10 @@ locals().update(importlib.import_module("PARAMETERS").__dict__)
 ####################################
 # Parameters
 ####################################
-imagesToAnnotateDir = "D:/CNTK-Workspace/ObjectDetectionUsingCntk/data/azeite/positive/"
+imagesToAnnotateDir = "D:/Documentos/1500fh/Case Supermarket/Machine Learning - Trainning/Fase de Testes/Amostras/Testes/ambientes/Teste6/clean/positive/"
 
 #no need to change these params
-drawingMaxImgSize = 500.0
+drawingMaxImgSize = 1000.0
 annotationsFile = resultsDir + "annotations.tsv"
 minNrPixels = -1
 

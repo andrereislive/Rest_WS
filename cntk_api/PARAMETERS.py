@@ -23,7 +23,7 @@ print("MY ROOT DIR = "+rootDir)
 ############################
 # default parameters
 ############################
-datasetName = "azeite"
+datasetName = "AzeiteGalloDS"
 
 #directories
 imgDir = rootDir + "/data/" + datasetName + "/"
@@ -45,23 +45,23 @@ imageNameRecognizedPrefix = "Recognized_image_" # prefixo do nome de uma imagem 
 # Andre - Custom parameters
 
 
-azeite_nRois = 200  # provavelmente o limite é o valor da hipotenuza do tamanho maximo de uma imagem de treino Ex 1456 x 2592 = nrois= 2950
+azeite_nRois = 3000  # provavelmente o limite é o valor da hipotenuza do tamanho maximo de uma imagem de treino Ex 1456 x 2592 = nrois= 2950
 ctm_ss_nmsThreshold = 0.9   # default eh 0.85
 ctm_nmsThreshold = 0.1  # the lower the more ROI will be combined 
 ctm_ss_max_merging_iterations = 20
 ctm_grid_nrScales = 7
 ctm_grid_aspectRatios =[1.0, 2.0, 0.5]
 ctm_grid_downscaleRatioPerIteration = 1.5
-ctm_roi_maxImgDim = 400 # Usado em imagens de treino de 1456 x 2592
+ctm_roi_maxImgDim = 400 
 
 # ROI generation
 
 
 roi_maxImgDim = ctm_roi_maxImgDim #400       # image size used for ROI generation
-roi_minDimRel = 0.01      # minimum relative width/height of a ROI
-roi_maxDimRel = 1.0       # maximum relative width/height of a ROI
-roi_minNrPixelsRel = 0    # minimum relative area covered by a ROI
-roi_maxNrPixelsRel = 1.0  # maximum relative area covered by a ROI
+roi_minDimRel = 0.50      #Default =0.01 # minimum relative width/height of a ROI
+roi_maxDimRel = 1.0     #Default =  1.0  # maximum relative width/height of a ROI
+roi_minNrPixelsRel = 0    #Default =0  # minimum relative area covered by a ROI
+roi_maxNrPixelsRel = 1.0  #Default = 1.0 # maximum relative area covered by a ROI
 roi_maxAspectRatio = 4.0  # maximum aspect Ratio of a ROI, both vertically and horizontally
 ss_minSize = 20                 # for a description of the selective search parameters see:
 ss_kvals   = (50, 500, 6)       #   http://dlib.net/dlib/image_transforms/segment_image_abstract.h.html#find_candidate_object_locations
@@ -162,9 +162,9 @@ elif datasetName.startswith("pascalVoc"):
         imdbs[image_set] = fastRCNN.pascal_voc(lutImageSet[image_set], year, classes, cntk_nrRois, cacheDir = cntkFilesDir)
         print("Number of {} images: {}".format(image_set, imdbs[image_set].num_images))
 
-elif datasetName.startswith("bebidas"):
+elif datasetName.startswith("CocaColaDS"):
     classes = ('__background__',  # always have '__background__' be at index 0
-               "coca pet","coca garrafa","coca lata","vinho")
+               "Coca-Cola")
 
 
     # roi generation
@@ -182,9 +182,9 @@ elif datasetName.startswith("bebidas"):
     for image_set in ["train", "test"]:
         imdbs[image_set] = imdb_data(image_set, classes, cntk_nrRois, imgDir, roiDir, cntkFilesDir, boAddGroundTruthRois = (image_set!='test'))
 
-elif datasetName.startswith("azeite"):
+elif datasetName.startswith("AzeiteGalloDS"):
     classes = ('__background__',  # always have '__background__' be at index 0
-               "azeite andorinha")
+               "Azeite Gallo")
 
     # roi generation
     cntk_nrRois = azeite_nRois   #this number is too low to get good accuracy but allows for fast training and scoring (for demo purposes)

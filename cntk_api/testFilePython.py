@@ -1,21 +1,57 @@
+from bs4 import BeautifulSoup
+import requests
+import re
+import urllib.request
+import urllib.response
+import os
+import argparse
+import sys
 import json
 
+# adapted from http://stackoverflow.com/questions/20716842/python-download-images-from-google-image-search
 
+def get_soup(url,header):
+    return BeautifulSoup(urllib.request.urlopen(urllib.request.Request(url,headers=header)),'html.parser')
 
-#json_file = 'd:\Django-Workspace\RestServer\cntk_api\json.json'
-#json_data = open(json_file)
-#data = json.load(json_data)
-myJson = {"clean_image": None, "recognized_objects": [{"score": "6.87916", "bottom": "1140", "right": "654", "nms": "False", "top": "648", "left": "473", "label": "azeite andorinha"}, {"score": "5.2365", "bottom": "822", "right": "972", "nms": "False", "top": "609", "left": "855", "label": "azeite andorinha2"}], "processed_image": ""}
-data = {"shelf_share_objects":None}
-#data['range'].append(10)
+def main(args):
+	parser = argparse.ArgumentParser(description='Scrape Google images')
+	parser.add_argument('-s', '--search', default='bananas', type=str, help='search term')
+	parser.add_argument('-n', '--num_images', default=3, type=int, help='num images to save')
+	parser.add_argument('-d', '--directory', default='/Users/gene/Downloads/', type=str, help='save directory')
+	args = parser.parse_args()
+	query = args.search#raw_input(args.search)
+	max_images = args.num_images
+	save_directory = args.directory
+	image_type="Action"
+	query= query.split()
+	query='+'.join(query)
+	url="https://www.google.co.in/search?q="+query+"&source=lnms&tbm=isch"
+	header={'User-Agent':"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36"}
+	soup = get_soup(url,header)
+	ActualImages=[]# contains the link for Large original images, type of  image
+	for a in soup.find_all("div",{"class":"rg_meta"}):
+	    link , Type =json.loads(a.text)["ou"]  ,json.loads(a.text)["ity"]
+	    ActualImages.append((link,Type))
+	for i , (img , Type) in enumerate( ActualImages[0:max_images]):
+	    try:
+	        req = urllib.request.Request(img, headers={'User-Agent' : header})
+	        raw_img = urllib.request.urlopen(req).read()
+			
+	        if len(Type)==0:
+	            name = "img" + "_"+ str(i)+".jpg"
+	        else :
+	            name = "img" + "_"+ str(i)+"."+Type
+			File f = open(name,'wb')
+			f.write(raw_img)
+	        f.close()
+	    except Exception as e:
+	        print("could not load : "+img)
+	        print(e)
 
-
-objects_array =  {"share_percentage": "10", "product": "produto1"}
-objects_array1 =  {"share_percentage": "10", "product": "produto"}
-
-data = [objects_array]
-data.append(objects_array1)
-
-myJson["shelf_share_objects"] = data
-
-print( myJson["recognized_objects"][1]["label"])
+if __name__ == '__main__':
+    from sys import argv
+    try:
+        main(argv)
+    except KeyboardInterrupt:
+        pass
+    sys.exit()
