@@ -3,9 +3,9 @@ from app import views
 
 urlpatterns = [
     # Projeto Intelligent Promoter
-    url(r'^intelligent_promoter/image/$', views.image_list),
+    url(r'^intelligent_promoter/image/$', views.supermercado),
    
-
+     url(r'^index/$', views.index),
     
     # Projeto Identificador de Fungos - Gabriel
     # Coloquem suas Urls aqui abaixo
@@ -14,6 +14,6 @@ urlpatterns = [
     # Projeto Identificador de Fungos - Gabriel
     # Coloquem suas Urls aqui abaixo
     #\/ \/ \/ \/ \/ \/ 
-  url(r'^agricultura/$', views.agricutura),
+  url(r'^agricultura/$', views.agricultura),
 
 ]

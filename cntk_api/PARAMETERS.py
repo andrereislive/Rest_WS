@@ -58,7 +58,7 @@ ctm_roi_maxImgDim = 400
 
 
 roi_maxImgDim = ctm_roi_maxImgDim #400       # image size used for ROI generation
-roi_minDimRel = 0.50      #Default =0.01 # minimum relative width/height of a ROI
+roi_minDimRel = 0.01      #Default =0.01 # minimum relative width/height of a ROI
 roi_maxDimRel = 1.0     #Default =  1.0  # maximum relative width/height of a ROI
 roi_minNrPixelsRel = 0    #Default =0  # minimum relative area covered by a ROI
 roi_maxNrPixelsRel = 1.0  #Default = 1.0 # maximum relative area covered by a ROI
