@@ -38,7 +38,8 @@ def supermercado(request):
        receiveImageJpgBytes(data["clean_image"], recognizeDir+imageUUidName+".jpg")
        # faz o processo de reconhecimento
        # passa somente o nome da imagem sem .jpg nem diretorios superiores
-       recognizeSavedImage(imageUUidName)
+       myDataset = "teste"
+       recognizeSavedImage(imageUUidName,myDataset)
        # retorna o json reconhecido  p dispositivo
        serializer = getShelfShareJSon_IntelligentPromoter(imageUUidName)
 
@@ -77,7 +78,7 @@ def supermercado(request):
 @csrf_exempt
 def agricultura(request):
      if request.method == 'POST':
-          
+       
 ## algoritmo OK INICIO #### Descomentar depois que terminar
        data = JSONParser().parse(request)
        imageUUidName = data["clean_image_uuid_name"]

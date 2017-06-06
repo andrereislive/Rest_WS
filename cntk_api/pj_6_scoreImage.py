@@ -8,11 +8,11 @@ import base64
 
 locals().update(importlib.import_module("PARAMETERS").__dict__)
 
-def generateJson(imageUUidName="1"): # passar o nome da imagem somente, sem os diretorios superiores e sem o .jpg
+def generateJson(imageUUidName="1", myDataset): # passar o nome da imagem somente, sem os diretorios superiores e sem o .jpg
     ####################################
     # Parameters
     ####################################
-
+    datasetName = myDataset
     imgPath = recognizeDir+imageUUidName+".jpg"
     # Directory to save recognized images
     outDir = recognizeDir

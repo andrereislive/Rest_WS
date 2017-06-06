@@ -11,9 +11,9 @@ def userRequest(imageJpgBytes):
     receiveImageJpgBytes(receiveImageJpgBytes)
     return getJSon()
 
-def recognizeSavedImage(imageUUidName): # passar o nome da imagem somente, sem os diretorios superiores e sem o .jpg
+def recognizeSavedImage(imageUUidName,myDataset): # passar o nome da imagem somente, sem os diretorios superiores e sem o .jpg
 
-    myJson =  generateJson(imageUUidName)# gera o json do cntk
+    myJson =  generateJson(imageUUidName,myDataset)# gera o json do cntk
     return myJson
 
 
