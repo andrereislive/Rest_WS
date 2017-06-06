@@ -18,7 +18,10 @@ if not (os.path.exists(rootDir)): # para evitar problema entre rodar no Rest e r
 # codigo cntk, os diretorios root mudam dependendo do modo que for executar
     rootDir = os.path.dirname(os.path.realpath(sys.argv[0])) 
 
+rootDir = "C:/Web Service - Rest/Rest_WS/cntk_api"
+
 print("MY ROOT DIR = "+rootDir)
+
 
 ############################
 # default parameters
