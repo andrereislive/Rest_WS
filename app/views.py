@@ -111,8 +111,7 @@ def agricultura(request):
        copyFileToHistoricStorage(fileSource,fileDest, deleteFromSource)
        return JsonResponse(serializer,  safe=False,status=201)   
 #### Algoritmo OK Fim DESCOMENTAR
-
-    return JsonResponse(serializer,  safe=False,status=201)
+     return JsonResponse(serializer,safe=False,status=201)
 
 # Fim Funcoes - Projeto dos Fungos        
 ###############################################
