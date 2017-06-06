@@ -38,7 +38,7 @@ def supermercado(request):
        receiveImageJpgBytes(data["clean_image"], recognizeDir+imageUUidName+".jpg")
        # faz o processo de reconhecimento
        # passa somente o nome da imagem sem .jpg nem diretorios superiores
-       myDataset = "teste"
+       myDataset = "AzeiteGalloDS"
        recognizeSavedImage(imageUUidName,myDataset)
        # retorna o json reconhecido  p dispositivo
        serializer = getShelfShareJSon_IntelligentPromoter(imageUUidName)

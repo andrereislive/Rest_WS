@@ -23,7 +23,7 @@ print("MY ROOT DIR = "+rootDir)
 ############################
 # default parameters
 ############################
-datasetName = "AzeiteGalloDS"
+datasetName = "AzeiteGalloDS2"
 
 #directories
 imgDir = rootDir + "/data/" + datasetName + "/"
