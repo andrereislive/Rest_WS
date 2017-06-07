@@ -70,9 +70,11 @@ for imgIndex in range(0, imdb.num_images):
         nmsKeepIndices = applyNonMaximaSuppression(nmsThreshold, labels, scores, imdb.roidb[imgIndex]['boxes'])
         print("Non-maxima surpression kept {:4} of {:4} rois (nmsThreshold={})".format(len(nmsKeepIndices), len(labels), nmsThreshold))
 
+    boPrintLabel = True
+    boPrintScore = True
     #visualize results
-    imgDebug = visualizeResults(imgPath, labels, scores, imdb.roidb[imgIndex]['boxes'], classes, nmsKeepIndices,
-                                boDrawNegativeRois=False, boDrawNmsRejectedRois=False, decisionThreshold = vis_decisionThresholds[classifier], boPrintLabel=False)
+    imgDebug = visualizeResults(imgPath, labels, scores, imdb.roidb[imgIndex]['boxes'], classes,boPrintLabel, boPrintScore, nmsKeepIndices,
+                                boDrawNegativeRois=False, boDrawNmsRejectedRois=False, decisionThreshold = vis_decisionThresholds[classifier])
     imshow(imgDebug, waitDuration=1, maxDim = 800)
     imwrite(imgDebug, visualizationDir + "/" + classifier + "_" + str(imgIndex) + os.path.basename(imgPath))
     

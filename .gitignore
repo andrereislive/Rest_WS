@@ -2,6 +2,7 @@
 .vscode
 *.pyc
 *.pyx
+web.config
 /cntk_api/__pycache__/
 /cntk_api/backup_v0/
 /cntk_api/data/

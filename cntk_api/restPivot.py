@@ -10,10 +10,12 @@ def userRequest(imageJpgBytes):
     
     receiveImageJpgBytes(receiveImageJpgBytes)
     return getJSon()
-
+####################################
 def recognizeSavedImage(imageUUidName): # passar o nome da imagem somente, sem os diretorios superiores e sem o .jpg
-
-    myJson =  generateJson(imageUUidName)# gera o json do cntk
+    # boPrintLabel= False, boPrintScore = False = Argumentos para imprimir o label e o score na imagem
+    boPrintLabel= True
+    boPrintScore = False
+    myJson =  generateJson(boPrintLabel, boPrintScore,imageUUidName)# gera o json do cntk 
     return myJson
 
 

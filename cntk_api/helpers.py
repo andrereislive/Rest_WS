@@ -475,9 +475,9 @@ def updateRoisGtClassIfHighGtOverlap(imdb, positivesGtOverlapThreshold):
 ####################################
 # Visualize results
 ####################################
-def visualizeResults(imgPath, roiLabels, roiScores, roiRelCoords, classes,
+def visualizeResults(imgPath, roiLabels, roiScores, roiRelCoords, classes, boPrintLabel, boPrintScore,
                      nmsKeepIndices = None, boDrawNegativeRois = True, boDrawNmsRejectedRois = True,
-                     decisionThreshold = 0.0, boPrintLabel= True):
+                     decisionThreshold = 0.0):
     # read and resize image
     imgWidth, imgHeight = imWidthHeight(imgPath)
     scale = 800.0 / max(imgWidth, imgHeight)
@@ -517,9 +517,12 @@ def visualizeResults(imgPath, roiLabels, roiScores, roiRelCoords, classes,
                     text = classes[label]
                     if roiScores:
                         if boPrintLabel:
-                            text += "(" + str(round(score, 2)) + ")"    
+                            if boPrintScore:
+                                text += "(" + str(round(score, 2)) + ")"    
                         else:
-                            text = "(" + str(round(score, 2)) + ")"
+                            text = ""
+                            if boPrintScore:
+                                text = "(" + str(round(score, 2)) + ")"
                     imgDebug = drawText(imgDebug, (rect[0],rect[1]), text, color = (255,255,255), font = font, colorBackground=color)
     return imgDebug
 

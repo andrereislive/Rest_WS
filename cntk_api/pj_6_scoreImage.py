@@ -8,11 +8,11 @@ import base64
 
 locals().update(importlib.import_module("PARAMETERS").__dict__)
 
-def generateJson(imageUUidName="1"): # passar o nome da imagem somente, sem os diretorios superiores e sem o .jpg
+def generateJson(boPrintLabel, boPrintScore,imageUUidName="1"): # passar o nome da imagem somente, sem os diretorios superiores e sem o .jpg
     ####################################
     # Parameters
     ####################################
-    datasetName = myDataset
+    
     imgPath = recognizeDir+imageUUidName+".jpg"
     # Directory to save recognized images
     outDir = recognizeDir
@@ -91,8 +91,10 @@ def generateJson(imageUUidName="1"): # passar o nome da imagem somente, sem os d
             len(nmsKeepIndices), len(labels), nmsThreshold))
     print("Time non-maxima surpression [ms]: " + str((datetime.datetime.now() - tstart).total_seconds() * 1000))
 
+  
 
-    imgDebug = visualizeResults(imgPath, labels, scores, currRois, classes, nmsKeepIndices,
+
+    imgDebug = visualizeResults(imgPath, labels, scores, currRois, classes,boPrintLabel,boPrintScore, nmsKeepIndices,
                             boDrawNegativeRois=False, boDrawNmsRejectedRois=False)
     saveDirRecognizedImages = outDir +imageNameRecognizedPrefix +os.path.basename(imgPath)
     imwrite(imgDebug, saveDirRecognizedImages )
