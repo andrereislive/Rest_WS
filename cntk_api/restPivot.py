@@ -23,7 +23,15 @@ def getShelfShareJSon_IntelligentPromoter(imageUidName):
     
     myJson = json.loads(readTxtToString( recognizeDir+imageUidName+".json"))
 
-    shelfShareObjects = calculateShareOfobjects(myJson)
+    imgOrig = imread(imgPath)
+
+    # pega o tamanho da imagem
+    im = imread(recognizeDir+imageUidName+".jpg")
+    width, height = np.shape(im[:,:,0])
+
+    # calcula o share acumulando por nome do label, passa o json com os objetos reconhecidos + tamanho da imagem
+    shelfShareObjects = calculateShareOfobjects(myJson,width,height)
+   
     # Add os shares agrupado para cada produto
     myJson["shelf_share_objects"] = shelfShareObjects 
     
@@ -31,7 +39,7 @@ def getShelfShareJSon_IntelligentPromoter(imageUidName):
     
     return myJson  
  # calcula quanto ocupam de espaco em pixels
-def calculateShareOfobjects(objectsJson, imageWidth = 2000 , imageHeight =2000):
+def calculateShareOfobjects(objectsJson, imageWidth , imageHeight):
    
     if(len(objectsJson["recognized_objects"])>0  ):
         imagePixelsSquared = imageWidth * imageHeight
@@ -90,7 +98,8 @@ def getListOfProducts(objectsJson):
 def calculateShareSingleProduct(left,top,right,bottom):
     width = int(right) -  int(left) 
     height =  int(bottom) -  int(top)
-    pixelsSquared = width * height
+    # importante usar abs para nao retornar valores negativos
+    pixelsSquared = abs(width) * abs(height)
     
     return pixelsSquared #  pixels quadrados
 
