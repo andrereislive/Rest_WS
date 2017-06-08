@@ -53,12 +53,12 @@ def calculateShareOfobjects(objectsJson, imageWidth , imageHeight):
         share_first = ( share_first / imagePixelsSquared )  * 100
         
         # inicia array 
-        objects_array =  {"share_percentage": share_first, "product": listOfProducts[0]}
+        objects_array =  {"share_percentage":  float("{0:.2f}".format(share_first)), "product": listOfProducts[0]}
         dataJson = [objects_array]
         for x in range(1, len(listOfProducts)):
             share = getProductShare(listOfProducts[x],objectsJson["recognized_objects"] )
             share = ( share / imagePixelsSquared )  * 100
-            it = {"share_percentage": share, "product": listOfProducts[x]}
+            it = {"share_percentage": float("{0:.2f}".format(share)), "product": listOfProducts[x]}
             dataJson.append(it)
             
         return dataJson
@@ -100,7 +100,7 @@ def calculateShareSingleProduct(left,top,right,bottom):
     # importante usar abs para nao retornar valores negativos
     pixelsSquared = abs(width) * abs(height)
     
-    return pixelsSquared #  pixels quadrados
+    return pixelsSquared   #  pixels quadrados
 
 def getAgricuturaJson():
     
