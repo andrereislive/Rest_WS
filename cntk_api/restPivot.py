@@ -109,7 +109,7 @@ def calculateShareSingleProduct(left,top,right,bottom):
 
     
     # importante usar abs para nao retornar valores negativos
-    pixelsSquared = width) * height
+    pixelsSquared = width * height
     
     return pixelsSquared   #  pixels quadrados
 
