@@ -23,7 +23,6 @@ def getShelfShareJSon_IntelligentPromoter(imageUidName):
     
     myJson = json.loads(readTxtToString( recognizeDir+imageUidName+".json"))
 
-    imgOrig = imread(imgPath)
 
     # pega o tamanho da imagem
     im = imread(recognizeDir+imageUidName+".jpg")
