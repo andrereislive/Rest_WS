@@ -95,10 +95,21 @@ def getListOfProducts(objectsJson):
 
     # calcula os pixels quadrados de um unico objeto
 def calculateShareSingleProduct(left,top,right,bottom):
-    width = int(right) -  int(left) 
-    height =  int(bottom) -  int(top)
+    width = 0
+    height = 0
+    if int(right > int(left)):
+        width = int(right) -  int(left) 
+    else:
+        width = int(left) -  int(right)  
+
+    if int(bottom > int(top)):
+        height = int(bottom) -  int(top) 
+    else:
+        height = int(top) -  int(bottom)       
+
+    
     # importante usar abs para nao retornar valores negativos
-    pixelsSquared = abs(width) * abs(height)
+    pixelsSquared = width) * height
     
     return pixelsSquared   #  pixels quadrados
 
