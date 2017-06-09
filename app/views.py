@@ -26,11 +26,6 @@ def supermercado(request):
     """
     List all code snippets, or create a new snippet.
     """
-    if request.method == 'GET':
-        
-        serializer = getSavedJSon_Intelligent_promoter()
-
-        return JsonResponse(serializer, safe=False)
 
     if request.method == 'POST':
       
@@ -65,10 +60,10 @@ def supermercado(request):
        fileDest = historicStorageDir 
        deleteFromSource = True
        copyFileToHistoricStorage(fileSource,fileDest, deleteFromSource)
-       return JsonResponse(serializer,  safe=False,status=201)   
+       return JsonResponse(serializer,  safe=False)   
 #### Algoritmo OK Fim DESCOMENTAR
 
-    return JsonResponse(serializer,  safe=False,status=201)
+    
    
 # Fim Funcoes - Intelligent Promoter        
 ###############################################
