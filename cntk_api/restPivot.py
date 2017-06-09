@@ -19,13 +19,13 @@ def recognizeSavedImage(imageUUidName): # passar o nome da imagem somente, sem o
     return myJson
 
 
-def getShelfShareJSon_IntelligentPromoter(imageUidName):
+def getShelfShareJSon_IntelligentPromoter(imageUuidName):
     
-    myJson = json.loads(readTxtToString( recognizeDir+imageUidName+".json"))
+    myJson = json.loads(readTxtToString( recognizeDir+imageUuidName+".json"))
 
 
     # pega o tamanho da imagem
-    im = imread(recognizeDir+imageUidName+".jpg")
+    im = imread(recognizeDir+imageUuidName+".jpg")
     width, height = np.shape(im[:,:,0])
 
     # calcula o share acumulando por nome do label, passa o json com os objetos reconhecidos + tamanho da imagem
@@ -113,9 +113,11 @@ def calculateShareSingleProduct(left,top,right,bottom):
     
     return pixelsSquared   #  pixels quadrados
 
-def getAgricuturaJson():
+def getAgricuturaJson(imageUuidName):
    
-    myJson = json.loads(readTxtToString( recognizeDir+"return.json"))
+    myJson = json.loads(readTxtToString( recognizeDir+imageUuidName+".json"))
+
+       
     return myJson  
 
    

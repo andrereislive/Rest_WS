@@ -22,10 +22,6 @@ def online(request):
 # INICIO Funcoes - Projeto Intelligent Promoter
 @csrf_exempt
 def supermercado(request):
-    
-    """
-    List all code snippets, or create a new snippet.
-    """
 
     if request.method == 'POST':
       
@@ -86,9 +82,7 @@ def agricultura(request):
        # passa somente o nome da imagem sem .jpg nem diretorios superiores
        recognizeSavedImage(imageUUidName)
        # retorna o json reconhecido  p dispositivo
-       serializer = getShelfShareJSon_IntelligentPromoter(imageUUidName)
-
-
+       serializer = getAgricuturaJson(imageUUidName)
 
        # remove o .json - Joga para pasta historic storage
        fileSource = recognizeDir + imageUUidName + ".json"
@@ -107,9 +101,9 @@ def agricultura(request):
        fileDest = historicStorageDir 
        deleteFromSource = True
        copyFileToHistoricStorage(fileSource,fileDest, deleteFromSource)
-       return JsonResponse(serializer,  safe=False,status=201)   
+       return JsonResponse(serializer,  safe=False)   
 #### Algoritmo OK Fim DESCOMENTAR
-     return JsonResponse(serializer,safe=False,status=201)
+    
 
 # Fim Funcoes - Projeto dos Fungos        
 ###############################################
