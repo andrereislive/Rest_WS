@@ -97,12 +97,12 @@ def getListOfProducts(objectsJson):
 def calculateShareSingleProduct(left,top,right,bottom):
     width = 0
     height = 0
-    if int(right) > int(left)):
+    if int(right) > int(left):
         width = int(right) -  int(left) 
     else:
         width = int(left) -  int(right)  
 
-    if int(bottom) > int(top)):
+    if int(bottom) > int(top):
         height = int(bottom) -  int(top) 
     else:
         height = int(top) -  int(bottom)       
@@ -114,7 +114,7 @@ def calculateShareSingleProduct(left,top,right,bottom):
     return pixelsSquared   #  pixels quadrados
 
 def getAgricuturaJson():
-    
+   
     myJson = json.loads(readTxtToString( recognizeDir+"return.json"))
     return myJson  
 

@@ -14,6 +14,9 @@ def index(request):
     return JsonResponse({"response": "Hello World"}, safe=False)
 
  
+####################### Check if server is online
+def online(request):
+    return HttpResponse('<h1>SERVER IS ONLINE</h1>',status=200)
 
 ###################################################
 # INICIO Funcoes - Projeto Intelligent Promoter
