@@ -1,3 +1,6 @@
+import sys
+sys.path.append("D:/Django-Workspace/RestServer/cntk_api")
+
 from django.conf.urls import url
 from app import views
 
